@@ -1,8 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Alina Valendo](https://up.htmlacademy.ru/javascript-individual/2/user/2479179).
-* Наставник: `Неизвестно`.
-
+* Наставник: [Виктория Никитина](https://htmlacademy.ru/profile/id1217273).
 ---
 
 _Не удаляйте и не изменяйте самовольно файлы и папки:_
