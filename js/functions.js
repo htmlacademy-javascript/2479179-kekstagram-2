@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const checkLength = (string = '', maxSymbols = 1) => string.length <= maxSymbols;
 
 function comparesStringLength(string, length) {
