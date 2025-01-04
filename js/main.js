@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Функция для создания массива из 25 объектов с описанием фотографий
 function generatePhotos() {
   // Создаем массив для хранения объектов
@@ -76,5 +77,4 @@ function generatePhotos() {
 
 // Вызываем функцию для генерации массива и выводим результат в консоль
 const generatedPhotos = generatePhotos();
-// eslint-disable-next-line no-console
 console.log(generatedPhotos);
