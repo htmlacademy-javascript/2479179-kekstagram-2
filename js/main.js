@@ -76,4 +76,5 @@ function generatePhotos() {
 
 // Вызываем функцию для генерации массива и выводим результат в консоль
 const generatedPhotos = generatePhotos();
+// eslint-disable-next-line no-console
 console.log(generatedPhotos);
