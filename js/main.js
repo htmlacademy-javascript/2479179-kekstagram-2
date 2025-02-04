@@ -7,4 +7,7 @@ console.log(generatedPhotos);
 
 // Отрисовываем миниатюры
 import { renderThumbnails } from './thumbnails.js';
-renderThumbnails();
+import './big-picture.js'; // Подключаем, чтобы функции работали
+
+renderThumbnails(); // Запускаем генерацию миниатюр
+

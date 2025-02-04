@@ -1,5 +1,5 @@
-// Импортируем данные о фотографиях
 import { generatePhotos } from './photos.js';
+import { openBigPicture } from './big-picture.js';
 
 // Функция для отрисовки миниатюр
 export function renderThumbnails() {
@@ -29,6 +29,11 @@ export function renderThumbnails() {
     pictureImg.alt = photo.description; // Описание для alt
     pictureLikes.textContent = photo.likes; // Количество лайков
     pictureComments.textContent = photo.comments.length; // Количество комментариев
+
+    // Добавляем обработчик клика на миниатюру
+    pictureElement.addEventListener('click', () => {
+      openBigPicture(photo); // Открываем полноразмерное изображение с нужными данными
+    });
 
     // Добавляем миниатюру в DocumentFragment
     fragment.appendChild(pictureElement);
