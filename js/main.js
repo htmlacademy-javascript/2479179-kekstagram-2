@@ -11,3 +11,5 @@ import './big-picture.js'; // Подключаем, чтобы функции р
 
 renderThumbnails(); // Запускаем генерацию миниатюр
 
+//Форма загрузки изображения
+import './form-handler.js';
