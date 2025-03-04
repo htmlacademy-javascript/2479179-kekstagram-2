@@ -1,44 +1,41 @@
-import { generatePhotos } from './photos.js';
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+import { fetchData } from './api.js';
 import { openBigPicture } from './big-picture.js';
 
-// Функция для отрисовки миниатюр
-export function renderThumbnails() {
-  // Генерируем данные о фотографиях
-  const photos = generatePhotos();
+// Функция для отрисовки миниатюр с сервера
+export async function renderThumbnails() {
+  try {
+    const photos = await fetchData(); // Загружаем данные с сервера
+    if (!photos.length) {
+      throw new Error('Список фотографий пуст');
+    }
 
-  // Находим контейнер, куда будем добавлять миниатюры
-  const picturesContainer = document.querySelector('.pictures');
+    const picturesContainer = document.querySelector('.pictures');
+    const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+    const fragment = document.createDocumentFragment();
 
-  // Находим шаблон миниатюры
-  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+    photos.forEach((photo) => {
+      const pictureElement = pictureTemplate.cloneNode(true);
+      const pictureImg = pictureElement.querySelector('.picture__img');
+      const pictureLikes = pictureElement.querySelector('.picture__likes');
+      const pictureComments = pictureElement.querySelector('.picture__comments');
 
-  // Создаём DocumentFragment для вставки элементов
-  const fragment = document.createDocumentFragment();
+      pictureImg.src = photo.url;
+      pictureImg.alt = photo.description;
+      pictureLikes.textContent = photo.likes;
+      pictureComments.textContent = photo.comments.length;
 
-  // Обходим каждую фотографию из сгенерированных данных
-  photos.forEach((photo) => {
-    // Клонируем шаблон элемента
-    const pictureElement = pictureTemplate.cloneNode(true);
+      pictureElement.addEventListener('click', () => {
+        openBigPicture(photo);
+      });
 
-    // Заполняем шаблон данными фотографии
-    const pictureImg = pictureElement.querySelector('.picture__img'); // Изображение
-    const pictureLikes = pictureElement.querySelector('.picture__likes'); // Лайки
-    const pictureComments = pictureElement.querySelector('.picture__comments'); // Комментарии
-
-    pictureImg.src = photo.url; // Устанавливаем путь к изображению
-    pictureImg.alt = photo.description; // Описание для alt
-    pictureLikes.textContent = photo.likes; // Количество лайков
-    pictureComments.textContent = photo.comments.length; // Количество комментариев
-
-    // Добавляем обработчик клика на миниатюру
-    pictureElement.addEventListener('click', () => {
-      openBigPicture(photo); // Открываем полноразмерное изображение с нужными данными
+      fragment.appendChild(pictureElement);
     });
 
-    // Добавляем миниатюру в DocumentFragment
-    fragment.appendChild(pictureElement);
-  });
-
-  // Вставляем все миниатюры в контейнер .pictures
-  picturesContainer.appendChild(fragment);
+    picturesContainer.appendChild(fragment);
+  } catch (error) {
+    console.error('Ошибка загрузки фотографий:', error);
+    alert('Ошибка загрузки данных. Попробуйте позже.');
+  }
 }
