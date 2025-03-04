@@ -187,8 +187,6 @@ function resetEffects() {
 }
 
 import { sendFormData } from './api.js';
-
-
 const submitButton = form.querySelector('.img-upload__submit');
 
 
