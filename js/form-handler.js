@@ -186,3 +186,34 @@ function resetEffects() {
   updateSlider('none');
 }
 
+import { sendFormData } from './api.js';
+const submitButton = form.querySelector('.img-upload__submit');
+
+
+// Сообщения об успешной или неудачной отправке
+function showMessage(success = true) {
+  const templateId = success ? '#success' : '#error';
+  const template = document.querySelector(templateId).content.cloneNode(true);
+  document.body.appendChild(template);
+
+  // Закрытие сообщения
+  setTimeout(() => document.querySelector(templateId.replace('#', '.')).remove(), 3000);
+}
+
+// Обработчик отправки формы
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  submitButton.disabled = true; // Блок кнопки
+
+  const response = await sendFormData(form);
+
+  if (response) {
+    closeForm();
+    showMessage(true); // Успешное сообщение
+  } else {
+    showMessage(false); // Сообщение об ошибке
+  }
+
+  submitButton.disabled = false; // Анлок кнопки
+});
