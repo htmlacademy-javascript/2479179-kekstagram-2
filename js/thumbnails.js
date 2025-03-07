@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 import { fetchData } from './api.js';
 /* eslint-disable no-console */
-import { generatePhotos } from './photos.js';
 import { openBigPicture } from './big-picture.js';
 
 // Функция для отрисовки миниатюр с сервера
