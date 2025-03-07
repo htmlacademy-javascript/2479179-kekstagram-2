@@ -36,3 +36,4 @@ form.addEventListener('submit', async (event) => {
     console.error('Ошибка при отправке формы');
   }
 });
+
