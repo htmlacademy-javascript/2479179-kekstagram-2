@@ -1,6 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { fetchData } from './api.js';
+/* eslint-disable no-console */
+import { generatePhotos } from './photos.js';
 import { openBigPicture } from './big-picture.js';
 
 // Функция для отрисовки миниатюр с сервера
@@ -39,3 +41,12 @@ export async function renderThumbnails() {
     alert('Ошибка загрузки данных. Попробуйте позже.');
   }
 }
+
+// Показываем блок фильтров после загрузки данных
+const filtersContainer = document.querySelector('.img-filters');
+filtersContainer.classList.remove('img-filters--inactive');
+// eslint-disable-next-line no-undef
+console.error('Ошибка загрузки фотографий:', error);
+// eslint-disable-next-line no-alert
+alert('Ошибка загрузки данных. Попробуйте позже.');
+
