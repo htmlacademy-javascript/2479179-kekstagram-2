@@ -7,6 +7,15 @@ const commentInput = document.querySelector('.text__description');
 
 //Показывание формы
 uploadInput.addEventListener('change', () => {
+  const file = uploadInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // eslint-disable-next-line no-use-before-define
+      previewImage.src = e.target.result; // Подставляем выбранное изображение в превью
+    };
+    reader.readAsDataURL(file); // Чтение файла как Data URL
+  }
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open'); // Прокрутка офф
 });
