@@ -4,20 +4,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="vendor/nouislider/nouislider.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="vendor/nouislider/nouislider.css">
-  <title>Кекстаграм</title>
+  <title>Keskstagram</title>
 </head>
 
 <body>
   <main>
 
-    <!-- Filtering images from other users -->
+    <!-- Фильтрация изображений от других пользователей -->
     <section class="img-filters  img-filters--inactive  container">
       <h2 class="img-filters__title  visually-hidden">Фильтр фотографий</h2>
-      <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
+      <form class="img-filters__form" action="https://31.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
         <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">По умолчанию</button>
         <button type=button class="img-filters__button" id="filter-random">Случайные</button>
         <button type=button class="img-filters__button" id="filter-discussed">Обсуждаемые</button>
@@ -32,11 +32,11 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="POST" enctype="multipart/form-data" action="https://31.javascript.htmlacademy.pro/kekstagram" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required>
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" accept="image/png, image/jpeg" required>
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -118,9 +118,10 @@
                 <!-- Добавление хэштегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" required>
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." required></textarea>
-                    <input type="hidden" name="current-effect" id="current-effect" value="none">
+                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
+                  </div>
+                  <div class="img-upload__field-wrapper">
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." data-pristine-maxlength="140" data-pristine-maxlength-message="Максимально 140 знаков"></textarea>
                   </div>
                 </fieldset>
 
@@ -151,11 +152,11 @@
           <div class="social__header">
             <img class="social__picture" src="img/avatar-1.svg" alt="Аватар автора фотографии" width="35" height="35">
             <p class="social__caption">Тестим новую камеру! =)</p>
-            <p class="social__likes">Нравится <span class="likes-count">356</span></p>
+            <p class="social__likes">Like <span class="likes-count">356</span></p>
           </div>
 
           <!-- Комментарии к изображению -->
-          <div class="social__comment-count"><span class="social__comment-shown-count">5</span> из <span class="social__comment-total-count">125</span> комментариев</div>
+          <div class="social__comment-count"><span class="social__comment-shown-count">5</span> of <span class="social__comment-total-count">125</span> комментариев</div>
           <ul class="social__comments">
             <li class="social__comment">
               <img class="social__picture" src="img/avatar-4.svg" alt="Аватар комментатора фотографии" width="35" height="35">
@@ -188,7 +189,7 @@
     <div class="page-footer__wrapper">
       <div class="page-footer__copyright  copyright">
         <a class="copyright__link  copyright__link--image" href="https://htmlacademy.ru/intensive/javascript"><img src="img/htmla-logo.svg" width="130" height="45" alt="HTML Academy"></a>
-        <p>Сделано в <a class="copyright__link  copyright__link--text" href="https://htmlacademy.ru/intensive/javascript">HTML Academy</a></p>
+        <p>Made in <a class="copyright__link  copyright__link--text" href="https://htmlacademy.ru/intensive/javascript">HTML Academy</a></p>
       </div>
       <ul class="page-footer__contacts  contacts">
         <li><a href="https://twitter.com/htmlacademy_ru" class="contacts__link  contacts__link--twitter">Twitter</a></li>
@@ -234,11 +235,18 @@
       <h2 class="data-error__title">Не удалось загрузить данные</h2>
     </section>
   </template>
-  <script src="./js/functions.js"></script>
-  <script type="module" src="./js/main.js"></script>
-  <script src="vendor/pristine/pristine.min.js"></script>
-  <script src="vendor/nouislider/nouislider.min.js"></script>
 
+  <!-- Шаблон для коммента -->
+  <template id="comment">
+    <li class="social__comment">
+      <img class="social__picture" src="{{avatar}}" alt="{{name}}" width="35" height="35">
+      <p class="social__text">{{text comment}}</p>
+    </li>
+  </template>
+
+  <script src="vendor/nouislider/nouislider.js"></script>
+  <script src="vendor/pristine/pristine.min.js"></script>
+  <script src="./js/main.js" type="module"></script>
 </body>
 
 </html>
