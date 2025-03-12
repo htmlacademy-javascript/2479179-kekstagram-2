@@ -24,18 +24,6 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-function throttle(callback, delayBetweenFrames) {
-  // Последний вызов
-  let lastTime = 0;
-  return function (...rest) {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-}
-
 // Рандомное целое число
 function getRandomInteger(min, max) {
   // Округление
@@ -63,6 +51,8 @@ function createRandomIdFromRangeGenerator(min, max) {
 }
 
 // Esc (true, если нажата)
-const isEscapeKey = (evt) => evt.key === 'Escape';
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
 
-export { showErrorMessage, isEscapeKey, throttle, debounce, createRandomIdFromRangeGenerator };
+export { showErrorMessage, isEscapeKey, debounce, createRandomIdFromRangeGenerator };

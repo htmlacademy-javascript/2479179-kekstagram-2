@@ -41,20 +41,28 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 // Преобразование тегов
-const convertTags = (tagString) =>
-  tagString.trim().split(' ').filter((tag) => tag.length);
+function convertTags(tagString) {
+  return tagString.trim().split(' ').filter((tag) => tag.length);
+}
 
 // Проверка типа файла
-const isTypeValid = (file) =>
-  FILE_TYPES.some((type) => file.name.toLowerCase().endsWith(type));
+function isTypeValid(file) {
+  return FILE_TYPES.some((type) => file.name.toLowerCase().endsWith(type));
+}
+
 
 // Валидация хештегов
-const isTagValid = (value) => convertTags(value).every((tag) => VALID_SYMBOLS.test(tag));
-const isCountValid = (value) => convertTags(value).length <= MAX_HASHTAG_COUNT;
-const isTagUnique = (value) => {
+function isTagValid(value) {
+  return convertTags(value).every((tag) => VALID_SYMBOLS.test(tag));
+}
+function isCountValid(value) {
+  return convertTags(value).length <= MAX_HASHTAG_COUNT;
+}
+
+function isTagUnique(value) {
   const lowerCaseTags = convertTags(value).map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
-};
+}
 
 // Добавление валидаторов
 pristine.addValidator(hashtagField, isTagValid, errorText.INVALID_PATTERN, 1, true);
@@ -69,25 +77,29 @@ const isTextFieldFocused = () =>
 const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
 
 // Закрытие по Esc
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused() && !isErrorMessageExists()) {
     evt.preventDefault();
     closeImgModal();
   }
-};
+}
 
 // Открытие изображения
-const onFileInputChange = () => {
+function onFileInputChange() {
   const file = imgUploadInput.files[0];
   if (file && isTypeValid(file)) {
     photoPreview.src = URL.createObjectURL(file);
-    effectsPreviews.forEach((preview) => (preview.style.backgroundImage = `url('${photoPreview.src}')`));
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
   }
   openImgModal();
-};
+}
 
 // Закрытие окна
-const onCancelButtonClick = () => closeImgModal();
+function onCancelButtonClick() {
+  return closeImgModal();
+}
 
 // Отправка формы
 async function sendForm(formElement) {
@@ -107,10 +119,10 @@ async function sendForm(formElement) {
 }
 
 // Сабмит формы
-const onFormSubmit = (evt) => {
+function onFormSubmit(evt) {
   evt.preventDefault();
   sendForm(evt.target);
-};
+}
 
 // Открытие окна
 function openImgModal() {

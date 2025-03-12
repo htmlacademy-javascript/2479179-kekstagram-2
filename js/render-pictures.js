@@ -5,17 +5,18 @@ const picturesTemplate = document.querySelector('#picture').content;
 const template = picturesTemplate.querySelector('.picture');
 
 // Функция для создания одной картинки
-const createPicture = ({ url, description, likes, comments }) => {
+function createPicture({ url, description, likes, comments }) {
   const picture = template.cloneNode(true);
   picture.querySelector('.picture__img').src = url;
   picture.querySelector('.picture__img').alt = description;
   picture.querySelector('.picture__likes').textContent = likes;
   picture.querySelector('.picture__comments').textContent = comments.length;
   return picture;
-};
+}
+
 
 // Функция для отображения всех картинок
-const renderPictures = (pictures) => {
+function renderPictures(pictures) {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const newPicture = createPicture(picture);
@@ -26,6 +27,6 @@ const renderPictures = (pictures) => {
     fragment.appendChild(newPicture);
   });
   container.appendChild(fragment);
-};
+}
 
 export { renderPictures, container };

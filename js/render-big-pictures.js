@@ -46,15 +46,17 @@ const renderComments = () => {
 };
 
 // Обработчик клика на кнопку загрузки комментариев
-const onCommentsLoaderClick = () => renderComments();
+function onCommentsLoaderClick() {
+  renderComments();
+}
 
 // Esc
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeUserModal();
+    onModalClose();
   }
-};
+}
 
 // Modal open
 function openUserModal() {
@@ -64,7 +66,7 @@ function openUserModal() {
 }
 
 // Modal close
-function closeUserModal() {
+function onModalClose() {
   commentsCountShown = 0;
   userModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -88,7 +90,7 @@ function showBigPicture(picture) {
   renderBigPicture(picture);
 }
 
-userModalClose.addEventListener('click', closeUserModal);
+userModalClose.addEventListener('click', onModalClose);
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
 export { showBigPicture };

@@ -14,10 +14,10 @@ function onBodyClick(evt) {
   if (evt.target.closest('.success__inner') || (evt.target.closest('.error__inner'))) {
     return;
   }
-  hideMessage();
+  onMessageHide();
 }
 
-function hideMessage() {
+function onMessageHide() {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
   existsElement.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -25,13 +25,13 @@ function hideMessage() {
 }
 
 function onCloseButtonClick() {
-  hideMessage();
+  onMessageHide();
 }
 
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    hideMessage();
+    onMessageHide();
   }
 }
 
@@ -49,7 +49,7 @@ function showErrorMessage() {
   body.appendChild(element);
   const ErrorButton = element.querySelector('.error__button');
   document.addEventListener('keydown', onDocumentKeydown);
-  ErrorButton.addEventListener('click', hideMessage);
+  ErrorButton.addEventListener('click', onMessageHide);
   document.addEventListener('click', onBodyClick);
 }
 
